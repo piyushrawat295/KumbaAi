@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen">
-      <Layout title={getPageTitle()}>
+      <Layout title={getPageTitle()}> {/* Pass the dynamic title to Layout */}
         <div className="w-full max-w-full">
           {renderPageContent()}
         </div>

@@ -6,31 +6,37 @@ const Layout = ({ children, title }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden">
-      {/* Sidebar */}
-      <div
-        className={`
-          fixed inset-y-0 left-0 z-40 w-60 bg-gray-900 text-white transform
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-          transition-transform duration-300 ease-in-out
-          md:relative md:translate-x-0 md:flex-shrink-0
-        `}
-      >
+    <div className="w-screen h-screen flex overflow-hidden">
+      {/* Desktop Sidebar */}
+      <div className="hidden md:block w-60 h-full bg-gray-900 text-white">
         <Sidebar />
       </div>
 
-      {/* Overlay for mobile when sidebar is open */}
+      {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 z-30 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
           onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
         />
       )}
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-1 overflow-y-auto md:ml-60">
-        <Header title={title} onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 p-4 bg-gray-50">{children}</main>
+      {/* Mobile Sidebar */}
+      <aside
+        className={`fixed z-50 top-0 left-0 h-full w-60 bg-gray-900 text-white transform transition-transform duration-300 ease-in-out md:hidden ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Sidebar navigation"
+      >
+        <Sidebar closeSidebar={() => setSidebarOpen(false)} />
+      </aside>
+
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
+        <Header onMenuClick={() => setSidebarOpen(true)} title={title} />
+        <main className="flex-1 overflow-y-auto bg-gray-50 p-4">{children}</main>
       </div>
     </div>
   );

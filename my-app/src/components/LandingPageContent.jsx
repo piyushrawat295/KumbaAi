@@ -65,6 +65,7 @@ const LandingPageContent = ({ onGetStarted }) => {
               <h3 className="text-xl font-semibold text-gray-900 mb-1">Explore Gallery</h3>
               <p className="text-sm text-gray-600">Discover amazing product videos created by Kumba AI</p>
             </div>
+            <UIButton/>
           </div>
 
           <div className="flex space-x-2 mb-6">
