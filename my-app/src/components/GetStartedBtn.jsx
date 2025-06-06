@@ -1,21 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const GTButton = () => {
+const GTButton = ({ onClick }) => {
   return (
     <StyledWrapper>
-      <button className="cssbuttons-io-button">
+      <button className="cssbuttons-io-button" onClick={onClick}>
         Get started
         <div className="icon">
           <svg height={24} width={24} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor" />
+            <path
+              d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+              fill="currentColor"
+            />
           </svg>
         </div>
       </button>
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
   .cssbuttons-io-button {
@@ -37,6 +40,7 @@ const StyledWrapper = styled.div`
     height: 2.8em;
     padding-right: 3.3em;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   .cssbuttons-io-button .icon {
@@ -70,6 +74,7 @@ const StyledWrapper = styled.div`
 
   .cssbuttons-io-button:active .icon {
     transform: scale(0.95);
-  }`;
+  }
+`;
 
 export default GTButton;

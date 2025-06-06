@@ -1,12 +1,50 @@
-import React from 'react'
-import KumbaAILanding from './components/KumbaAILanding'
+import React, { useState } from 'react';
+import Layout from './components/Layout';
+import LandingPageContent from './components/LandingPageContent';
+import TextToVideoContent from './components/TextToVideoContent';
 
-function App() {
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('landing');
+
+  const handleGetStarted = () => {
+    setCurrentPage('text-to-video');
+  };
+
+  const handleBackToLanding = () => {
+    setCurrentPage('landing');
+  };
+
+  // Function to get page title based on current page
+  const getPageTitle = () => {
+    switch (currentPage) {
+      case 'text-to-video':
+        return 'Text To Video';
+      case 'landing':
+      default:
+        return 'Product Video Generator';
+    }
+  };
+
+  // Function to render current page content
+  const renderPageContent = () => {
+    switch (currentPage) {
+      case 'text-to-video':
+        return <TextToVideoContent onBack={handleBackToLanding} />;
+      case 'landing':
+      default:
+        return <LandingPageContent onGetStarted={handleGetStarted} />;
+    }
+  };
+
   return (
-    <div className="h-screen w-screen overflow-hidden">
-      <KumbaAILanding />
+    <div className="w-full min-h-screen">
+      <Layout title={getPageTitle()}>
+        <div className="w-full max-w-full">
+          {renderPageContent()}
+        </div>
+      </Layout>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
